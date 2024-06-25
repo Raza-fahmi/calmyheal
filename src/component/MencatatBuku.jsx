@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Popup from "./Popup";
 
 export default function MencatatBuku({ link }) {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleOpenPopup = () => {
+    setIsPopupVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false);
+  };
+
   return (
     <div className="bg-fourt text-primary font-Montserrat p-5">
       <p className="text-base mx-7 font-semibold">
@@ -24,11 +35,13 @@ export default function MencatatBuku({ link }) {
           }}
         />
         <div className="flex justify-end mt-5">
-          <Link to={link}>
-            <button className="bg-secondary hover:bg-sixth text-fourt px-2 py-1 rounded-lg w-[135px] lg:text-lg lg:w-[150px] lg:py-3 lg:font-semibold lg:rounded-2xl text-center no-underline">
-              Kirim
-            </button>
-          </Link>
+          <button
+            onClick={handleOpenPopup}
+            className="bg-secondary hover:bg-sixth text-fourt px-2 py-1 rounded-lg w-[135px] lg:text-lg lg:w-[150px] lg:py-3 lg:font-semibold lg:rounded-2xl text-center no-underline"
+          >
+            Kirim
+          </button>
+          <Popup isVisible={isPopupVisible} onClose={handleClosePopup} />
         </div>
       </div>
     </div>
